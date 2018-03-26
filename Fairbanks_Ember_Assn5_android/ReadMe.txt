@@ -1,0 +1,1 @@
+I added React Navigation and Native Base to this project via npm.

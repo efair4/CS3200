@@ -1,0 +1,3 @@
+rootProject.name = 'Fairbanks_Ember_Assn5_android'
+
+include ':app'
