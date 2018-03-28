@@ -1,4 +1,4 @@
 import { AppRegistry } from 'react-native';
-import App from './components/App';
+import ReduxWrapper from './components/ReduxWrapper';
 
-AppRegistry.registerComponent('Fairbanks_Ember_Assn6_android', () => App);
+AppRegistry.registerComponent('Fairbanks_Ember_Assn6_android', () => ReduxWrapper);

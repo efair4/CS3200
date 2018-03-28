@@ -5,13 +5,19 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+import navigate from '../actions/actions';
+
 class NewListButton extends Component {
     render() {
         return(
             <TouchableOpacity
-                onPress={this.props.dispatchNavigate('CreateListScreen')}
+                style={{marginRight: 15}}
+                onPress={() => this.props.navigation.navigate('CreateListScreen')}
             >
-                <Icon name='plus'/>
+                <Icon 
+                    name='plus'
+                    size={20}
+                />
             </TouchableOpacity>
         )
     }

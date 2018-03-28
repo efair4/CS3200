@@ -26,12 +26,21 @@ class HomeScreen extends Component {
         return {
             headerStyle: {backgroundColor: '#2097F4'},
             headerTitleStyle: {color: 'white'},
-            headerRight: <NewListButton/>
+            headerRight: <NewListButton/>,
         }
     }
 
     render() {
-        <Content>
+        return (
+            <View style={styles.container}>
+                {this.props.lists.length != 0 ? this._renderLists() : <Text style={styles.message}>You don't have any lists yet. Tap the plus in the top right to create one!</Text> }
+            </View>
+        );
+    }
+
+    _renderLists() {
+        return (
+            <Content>
             <List dataArray={this.props.lists}
                 renderRow={(item) => {
                     return(
@@ -42,7 +51,7 @@ class HomeScreen extends Component {
                             <Body>
                                 <Text  
                                     style={styles.listItem}
-                                    onPress={() => this.props.dispatchNavigate('ListScreen')}
+                                    onPress={() => this.props.dispatchNavigate('ListScreen', {listName: item.getName()})}
                                 >
                                     {item.getName()}
                                 </Text>
@@ -53,7 +62,8 @@ class HomeScreen extends Component {
                         </ListItem>
                     );
                 }}/>
-        </Content>
+            </Content>
+        );
     }
 }
 

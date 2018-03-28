@@ -22,11 +22,22 @@ import styles from '../styles/Styles';
 import NewListButton from '../components/NewListButton';
 
 class CreateListScreen extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            listName: null,
+            iconName: null
+        }
+    }
     static navigationOptions = ({ navigation }) => {
         return {
             headerStyle: {backgroundColor: '#2097F4'},
             headerTitleStyle: {color: 'white'},
-            headerRight: <NewListButton/>
+            headerRight: <DoneButton 
+                listName={this.state.listName} 
+                iconName={this.state.iconName}/>,
+            headerLeft: <CancelButton/>
         }
     }
 
@@ -69,4 +80,4 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(CreateListScreen);

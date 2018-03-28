@@ -1,4 +1,4 @@
-//This screen displays the user's list of lists.
+//This screen displays a specific list.
 
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
@@ -22,11 +22,14 @@ import styles from '../styles/Styles';
 import NewListButton from '../components/NewListButton';
 
 class ListScreen extends Component {
+    componentDidMount() {
+        this.props.navigation.setParams({screenTitle: this.props.listName});
+    }
     static navigationOptions = ({ navigation }) => {
         return {
+            title: navigation.state.params.screenTitle,
             headerStyle: {backgroundColor: '#2097F4'},
             headerTitleStyle: {color: 'white'},
-            headerRight: <NewListButton/>
         }
     }
 
@@ -57,16 +60,18 @@ class ListScreen extends Component {
     }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state,props) => {
     return {
-        lists: state.lists
+        list: state.lists[this.props.listIndex],
+        listName: props.navigation.state.params.listName
     };
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        dispatchNavigate: (screen) => dispatch(navigate(screen))
+        dispatchAddItem: (item) => dispatch(addItem(item)),
+        dispatchDeleteItem: (item) => dispatch(deleteItem(item))
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(ListScreen);

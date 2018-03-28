@@ -40,7 +40,7 @@ const RootNavigator = StackNavigator({
 export default class App extends Component {
 	render() {
 		return (
-		<RootNavigator/>
+			<RootNavigator/>
 		);
 	}
 }
