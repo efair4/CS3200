@@ -3,7 +3,6 @@ const ADDLIST = 'ADDLIST';
 const ADDITEM = 'ADDITEM';
 const DELETEITEM = 'DELETEITEM';
 const DELETELIST = 'DELETELIST';
-const POPSCREEN = 'POPSCREEN';
 
 export {
     NAVIGATE,
@@ -11,5 +10,4 @@ export {
     ADDLIST,
     DELETEITEM,
     DELETELIST,
-    POPSCREEN
 };

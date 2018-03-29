@@ -14,12 +14,6 @@ export function navigate(screen) {
     };
 }
 
-export function popScreen() {
-    return {
-        type: POPSCREEN
-    };
-}
-
 export function addList(list) {
     return {
         type: ADDLIST,

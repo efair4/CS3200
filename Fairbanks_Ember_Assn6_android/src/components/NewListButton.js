@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import {
     TouchableOpacity
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import navigate from '../actions/actions';
-
-class NewListButton extends Component {
+export default class NewListButton extends Component {
     render() {
         return(
             <TouchableOpacity
@@ -22,11 +19,3 @@ class NewListButton extends Component {
         )
     }
 }
-
-function mapDispatchToProps(dispatch) {
-    return {
-        dispatchNavigate: (screen) => dispatch(navigate(screen))
-    };
-}
-
-export default connect(null, mapDispatchToProps)(NewListButton);

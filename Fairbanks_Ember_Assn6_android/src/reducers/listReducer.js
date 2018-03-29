@@ -1,7 +1,6 @@
 
 import { 
     NAVIGATE,
-    POPSCREEN,
     ADDITEM,
     ADDLIST,
     DELETEITEM,
@@ -17,11 +16,7 @@ export default function(state = initialState, action) {
         case NAVIGATE:
             state.navigation.navigate(action.screen);
             return state;
-        case POPSCREEN:
-            state.navigation.goBack();
-            return state;
         case ADDLIST:
-            state.navigation.pop();
             return {lists: state.lists.append(action.list)};
         case ADDITEM:
             return {lists: () => {

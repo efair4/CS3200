@@ -26,7 +26,7 @@ class HomeScreen extends Component {
         return {
             headerStyle: {backgroundColor: '#2097F4'},
             headerTitleStyle: {color: 'white'},
-            headerRight: <NewListButton/>,
+            headerRight: <NewListButton navigation={navigation}/>,
         }
     }
 

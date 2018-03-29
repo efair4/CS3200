@@ -13,10 +13,30 @@ export default StyleSheet.create({
         textAlign: 'center',
         marginTop: 70
     },
+    chooseIconImage: {
+        margin: 5
+    },
+    textInput: {
+        fontSize: 30,
+    },
     listItem: {
         fontSize: 23,
         margin: 5,
         color: 'black',
         textAlign: 'left',
+    },
+    doneButton: {
+        fontSize: 20,
+        fontFamily: 'sans-serif-bold',
+        fontWeight: '500',
+        marginRight: 15,
+        color: 'black'
+    },
+    cancelButton: {
+        fontSize: 20,
+        fontFamily: 'sans-serif-bold',
+        fontWeight: '300',
+        marginLeft: 15,
+        color: 'black'
     }
 });

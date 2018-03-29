@@ -10,12 +10,10 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 export default class CancelButton extends Component {
     render() {
         return(
-            <TouchableOpacity
-                onPress={() => this.props.navigation.goBack()}
-            >
-                <Text style={styles.cancelButton}>
-                    Cancel
-                </Text>
+            <TouchableOpacity 
+                style={{borderColor: 'blue', borderWidth: 33}}
+                onPress={() => this.props.setIcon(this.props.icon)}>
+                 <Image style={styles.chooseIconImage} source={this.props.icon}/>
             </TouchableOpacity>
         )
     }

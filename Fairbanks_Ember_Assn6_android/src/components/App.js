@@ -25,10 +25,10 @@ const RootNavigator = StackNavigator({
 			title: 'My Lists'
 		}
 	},
-	List: {
+	ListScreen: {
 		screen: ListScreen
 	},
-	CreateList: {
+	CreateListScreen: {
 		screen: CreateListScreen
 	}
 },
