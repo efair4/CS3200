@@ -14,7 +14,7 @@ export default StyleSheet.create({
         marginTop: 70
     },
     chooseIconImage: {
-        margin: 5
+        margin: 0
     },
     textInput: {
         fontSize: 30,

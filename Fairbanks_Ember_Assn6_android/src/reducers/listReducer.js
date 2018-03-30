@@ -1,6 +1,5 @@
-
+import { AsyncStorage } from 'react-native';
 import { 
-    NAVIGATE,
     ADDITEM,
     ADDLIST,
     DELETEITEM,
@@ -8,16 +7,26 @@ import {
 } from '../actions/constants';
 
 let initialState = {
-    lists: []
+    lists: ''
 };
 
 export default function(state = initialState, action) {
     switch(action.type) {
-        case NAVIGATE:
-            state.navigation.navigate(action.screen);
-            return state;
         case ADDLIST:
-            return {lists: state.lists.append(action.list)};
+            var newLists = state.lists;
+            newLists += ', ' + action.list;
+            AsyncStorage.mergeItem('lists', JSON.stringify(action.list))
+            .then((response) => response.json())
+            .then((responseJson) => {
+                JSON.parse(AsyncStorage.getItem('lists'))
+                .then((response) => {
+
+                })
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+            return {lists: newLists};
         case ADDITEM:
             return {lists: () => {
                 var listToEdit = state.lists.find(list => list.id === action.listId);

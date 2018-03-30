@@ -23,7 +23,7 @@ import NewListButton from '../components/NewListButton';
 
 class ListScreen extends Component {
     componentDidMount() {
-        this.props.navigation.setParams({screenTitle: this.props.listName});
+        this.props.navigation.setParams({screenTitle: this.props.list.listName});
     }
     static navigationOptions = ({ navigation }) => {
         return {
@@ -40,14 +40,13 @@ class ListScreen extends Component {
                     return(
                         <ListItem>
                             <Left>
-                                <Icon name={item.getIconName()}/>
+                                <Icon name={item.icon}/>
                             </Left>
                             <Body>
                                 <Text  
                                     style={styles.listItem}
-                                    onPress={() => this.props.dispatchNavigate('ListScreen')}
                                 >
-                                    {item.getName()}
+                                    {item.listName}
                                 </Text>
                             </Body>
                             <Right>
@@ -62,8 +61,7 @@ class ListScreen extends Component {
 
 const mapStateToProps = (state,props) => {
     return {
-        list: state.lists[this.props.listIndex],
-        listName: props.navigation.state.params.listName
+        list: props.navigation.state.params.list
     };
 }
 

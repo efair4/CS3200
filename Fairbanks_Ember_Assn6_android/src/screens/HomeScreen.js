@@ -7,6 +7,7 @@ import {
     Text,
     TouchableOpacity,
     FlatList,
+    Image,
     View
 } from 'react-native';
 import {
@@ -46,14 +47,14 @@ class HomeScreen extends Component {
                     return(
                         <ListItem>
                             <Left>
-                                <Icon name={item.getIconName()}/>
+                                <Image source={item.icon}/>
                             </Left>
                             <Body>
                                 <Text  
                                     style={styles.listItem}
-                                    onPress={() => this.props.dispatchNavigate('ListScreen', {listName: item.getName()})}
+                                    onPress={() => this.props.navigation.navigate('ListScreen', {list: item})}
                                 >
-                                    {item.getName()}
+                                    {item.listName}
                                 </Text>
                             </Body>
                             <Right>
@@ -75,7 +76,6 @@ const mapStateToProps = (state) => {
 
 function mapDispatchToProps(dispatch) {
     return {
-        dispatchNavigate: (screen) => dispatch(navigate(screen))
     };
 }
 
