@@ -1,18 +1,15 @@
 import keyKeeper from '../utils/KeyKeeper';
 
 export class List {
-    constructor(listName, iconName) {
+    constructor(listName, icon, dateCreated) {
         this.listName = listName;
-        this.iconName = iconName;
+        this.icon = icon;
+        this.dateCreated = dateCreated;
         this.id = keyKeeper.getKey();
         this.listItems = [];
     }
 
-    getListName() {
-        return this.listName;
-    }
-
-    getIconName() {
-        return this.iconName;
+    getListObject() {
+        return {listName: this.listName, icon: this.icon, dateCreated: this.dateCreated, id: this.id, listItems: this.listItems};
     }
 }

@@ -7,15 +7,29 @@ import {
 } from '../actions/constants';
 
 let initialState = {
-    lists: ''
+    lists: [],
+    imagePaths: [
+        require('../images/Batman.jpg'),
+        require('../images/images-5.jpg'),
+        require('../images/images-34.jpg'),
+        require('../images/images-76.jpg'),
+        require('../images/images-101.jpg'),
+        require('../images/images-10.jpg'),
+        require('../images/images-119.jpg'),
+        require('../images/images-110.jpg'),
+        require('../images/images-97.jpg'),
+        require('../images/images-59.jpg'),
+        require('../images/images-38.jpg'),
+        require('../images/images-0.jpg')]
 };
 
 export default function(state = initialState, action) {
     switch(action.type) {
         case ADDLIST:
-            var newLists = state.lists;
-            newLists += ', ' + action.list;
-            AsyncStorage.mergeItem('lists', JSON.stringify(action.list))
+            var newLists = JSON.parse(JSON.stringify(state.lists));
+            var listObject = action.list.getListObject();
+            newLists.push(listObject);
+            AsyncStorage.mergeItem('lists', JSON.stringify(listObject[0]))
             .then((response) => response.json())
             .then((responseJson) => {
                 JSON.parse(AsyncStorage.getItem('lists'))
@@ -26,15 +40,14 @@ export default function(state = initialState, action) {
             .catch((error) => {
                 console.error(error);
             });
-            return {lists: newLists};
+            return {lists: newLists, imagePaths: state.imagePaths};
         case ADDITEM:
-            return {lists: () => {
-                var listToEdit = state.lists.find(list => list.id === action.listId);
-                listToEdit.append(action.item);
+                if(action.item.length === 0)  {return state;}
+                var listToEdit = JSON.parse(JSON.stringify(state.lists.find(list => list.id === action.listId)));
                 var index = state.lists.indexOf(listToEdit);
+                listToEdit.listItems.push(action.item);
                 state.lists[index] = listToEdit;
-                return state.lists;
-            }}
+                return {lists: state.lists, imagePaths: state.imagePaths};
         case DELETEITEM:
             return {lists: () => {
                 var listToEdit = state.lists.find(list => list.id === action.listId);

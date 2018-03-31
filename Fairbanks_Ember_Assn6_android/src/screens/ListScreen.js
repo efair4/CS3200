@@ -7,6 +7,7 @@ import {
     Text,
     TouchableOpacity,
     FlatList,
+    TextInput,
     View
 } from 'react-native';
 import {
@@ -15,15 +16,25 @@ import {
     ListItem,
     Right,
     Left,
-    Body
+    Body,
+    CheckBox
 } from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import styles from '../styles/Styles';
 import NewListButton from '../components/NewListButton';
+import {addItem, deleteItem} from '../actions/actions';
 
 class ListScreen extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state= {
+            item: ''
+        }
+    }
     componentDidMount() {
         this.props.navigation.setParams({screenTitle: this.props.list.listName});
+
     }
     static navigationOptions = ({ navigation }) => {
         return {
@@ -34,13 +45,19 @@ class ListScreen extends Component {
     }
 
     render() {
+        return (
+        <View style={styles.container}>
         <Content>
-            <List dataArray={this.props.lists}
+            <List 
+                keyboardDismissMode='on-drag'
+                dataArray={this.props.list.listItems}
                 renderRow={(item) => {
                     return(
                         <ListItem>
                             <Left>
-                                <Icon name={item.icon}/>
+                                <CheckBox 
+                                    onPress={() => this.onCheckPress(item)}
+                                    checked={this.props.list.checked}/>
                             </Left>
                             <Body>
                                 <Text  
@@ -50,25 +67,42 @@ class ListScreen extends Component {
                                 </Text>
                             </Body>
                             <Right>
-                                <Icon name="chevron-right"/>
+                                <Icon 
+                                    name="times-circle"
+                                    onPress={() => this.props.dispatchDeleteItem(this.props.list, item)}/>
                             </Right>
                         </ListItem>
                     );
                 }}/>
+                 <TextInput
+                style={styles.newItemTextInput}
+                keyboadType='default'
+                placeholder='New Item'
+                keyboardShouldPersistTaps='never'
+                onChangeText={(val) => this.setState({item: val})}
+                onSubmitEditing={() => {
+                    this.setState({item: ''});
+                    this.props.dispatchAddItem(this.props.list, this.state.item)}
+                }
+            />
         </Content>
+       
+        </View>
+        );
     }
 }
 
 const mapStateToProps = (state,props) => {
+    var thislist = state.lists.find(item => item.id === props.navigation.state.params.list.id);
     return {
-        list: props.navigation.state.params.list
+        list: state.lists.find(item => item.id === props.navigation.state.params.list.id)
     };
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        dispatchAddItem: (item) => dispatch(addItem(item)),
-        dispatchDeleteItem: (item) => dispatch(deleteItem(item))
+        dispatchAddItem: (list, item) => dispatch(addItem(list, item)),
+        dispatchDeleteItem: (list, item) => dispatch(deleteItem(list, item))
     };
 }
 

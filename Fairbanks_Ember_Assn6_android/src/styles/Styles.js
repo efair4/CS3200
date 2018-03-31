@@ -19,10 +19,25 @@ export default StyleSheet.create({
     textInput: {
         fontSize: 30,
     },
-    listItem: {
+    newItemTextInput: {
+        fontSize: 15,
+    },
+    listIcon: {
+        height: 10,
+        alignSelf: 'flex-start',
+        aspectRatio: 1,
+        margin: 10
+    },
+    listName: {
         fontSize: 23,
         margin: 5,
         color: 'black',
+        textAlign: 'left',
+    },
+    dateCreated: {
+        fontSize: 15,
+        margin: 5,
+        color: 'gray',
         textAlign: 'left',
     },
     doneButton: {

@@ -22,13 +22,19 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import styles from '../styles/Styles';
 import NewListButton from '../components/NewListButton';
 
+var self;
+
 class HomeScreen extends Component {
     static navigationOptions = ({ navigation }) => {
         return {
             headerStyle: {backgroundColor: '#2097F4'},
             headerTitleStyle: {color: 'white'},
-            headerRight: <NewListButton navigation={navigation}/>,
+            headerRight: <NewListButton navigation={navigation} refreshHomeScreen={() => self.forceUpdate()}/>,
         }
+    }
+
+    componentDidMount() {
+        self = this;
     }
 
     render() {
@@ -45,16 +51,24 @@ class HomeScreen extends Component {
             <List dataArray={this.props.lists}
                 renderRow={(item) => {
                     return(
-                        <ListItem>
+                        <ListItem 
+                        onPress={() => this.props.navigation.navigate('ListScreen', {list: item})}>
                             <Left>
-                                <Image source={item.icon}/>
+                                <Image
+                                    style={styles.listIcon} 
+                                    source={this.props.imagePaths[item.icon]}
+                                    resizeMode='contain'/>
                             </Left>
                             <Body>
                                 <Text  
-                                    style={styles.listItem}
-                                    onPress={() => this.props.navigation.navigate('ListScreen', {list: item})}
+                                    style={styles.listName}
                                 >
                                     {item.listName}
+                                </Text>
+                                <Text  
+                                    style={styles.dateCreated}
+                                >
+                                    {item.dateCreated}
                                 </Text>
                             </Body>
                             <Right>
@@ -70,7 +84,8 @@ class HomeScreen extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        lists: state.lists
+        lists: state.lists,
+        imagePaths: state.imagePaths
     };
 }
 

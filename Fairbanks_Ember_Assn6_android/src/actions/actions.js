@@ -21,7 +21,7 @@ export function addList(list) {
     };
 }
 
-export function addItem(item, list) {
+export function addItem(list, item) {
     return {
         type: ADDITEM,
         listId: list.id,
@@ -36,7 +36,7 @@ export function deleteList(list) {
     }
 }
 
-export function deleteItem(item, list) {
+export function deleteItem(list, item) {
     return {
         type: DELETEITEM,
         listId: list.id,

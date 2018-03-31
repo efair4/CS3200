@@ -31,20 +31,8 @@ class CreateListScreen extends Component {
         this.state = {
             listName: null,
             icon: null,
+            dateCreated: null,
             selected: new Map(),
-            imagePaths: [
-                require('../images/Batman.jpg'),
-                require('../images/images-5.jpg'),
-                require('../images/images-34.jpg'),
-                require('../images/images-76.jpg'),
-                require('../images/images-101.jpg'),
-                require('../images/images-10.jpg'),
-                require('../images/images-119.jpg'),
-                require('../images/images-110.jpg'),
-                require('../images/images-97.jpg'),
-                require('../images/images-59.jpg'),
-                require('../images/images-38.jpg'),
-                require('../images/images-0.jpg')]
         }
     }
 
@@ -59,6 +47,13 @@ class CreateListScreen extends Component {
     }
 
     componentDidMount() {
+        var today = new Date();
+        var day = today.getDate();
+        var month = this._getMonthString(today.getMonth() + 1);
+        var year = today.getFullYear();
+        this.setState({
+            dateCreated: month + ' ' + day + ', ' + year
+        }); 
         this.props.navigation.setParams({
             donePressed: this._donePressed
         });
@@ -79,7 +74,7 @@ class CreateListScreen extends Component {
                 </Text>
                 <FlatList 
                     contentContainerStyle={{alignItems: 'center', marginTop: 8}}
-                    data={this.state.imagePaths}
+                    data={this.props.imagePaths}
                     extraData={this.state}
                     numColumns={3}
                     keyExtractor={(item, index) => keyKeeper.getKey()}
@@ -95,16 +90,16 @@ class CreateListScreen extends Component {
                 id={item}
                 selected={!!this.state.selected.get(item)}
                 icon={item}
-                setIcon={() => this._onPressIcon(item, this.state.imagePaths[item])}
+                setIcon={() => this._onPressIcon(item)}
             />
         )
     }
 
-    _onPressIcon(item, icon) {
+    _onPressIcon(item) {
         this.setState((state) => {
             const selected = new Map();
             selected.set(item, !selected.get(item)); 
-            return {selected, icon: icon};
+            return {selected, icon: item-1};
         });
     }
 
@@ -116,7 +111,7 @@ class CreateListScreen extends Component {
             self._launchAlert('No Icon!', 'Please select an icon for your list');
         }
         else {
-            self.props.dispatchAddList(new List(self.state.listName, self.state.icon))
+            self.props.dispatchAddList(new List(self.state.listName, self.state.icon, self.state.dateCreated));
             navigation.goBack();
         }
     }
@@ -131,6 +126,43 @@ class CreateListScreen extends Component {
                 {cancelable: true}
         );
     }
+
+    _getMonthString(monthInt) {
+        switch(monthInt) {
+            case 1:
+                return 'January';
+            case 2:
+                return 'February';
+            case 3:
+                return 'March';
+            case 4:
+                return 'April';
+            case 5:
+                return 'May';
+            case 6:
+                return 'June';
+            case 7:
+                return 'July';
+            case 8:
+                return 'August';
+            case 9:
+                return 'September';
+            case 10:
+                return 'October';
+            case 11:
+                return 'November';
+            case 12:
+                return 'December';
+            default:
+                return 'March';
+        }
+    }
+}
+
+const mapStateToProps = (state) => {
+    return {
+        imagePaths: state.imagePaths
+    };
 }
 
 function mapDispatchToProps(dispatch) {
@@ -139,4 +171,4 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default connect(null, mapDispatchToProps)(CreateListScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(CreateListScreen);
