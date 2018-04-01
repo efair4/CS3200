@@ -3,6 +3,7 @@ const ADDLIST = 'ADDLIST';
 const ADDITEM = 'ADDITEM';
 const DELETEITEM = 'DELETEITEM';
 const DELETELIST = 'DELETELIST';
+const CHECKITEM = 'CHECKITEM';
 
 export {
     SETLISTS,
@@ -10,4 +11,5 @@ export {
     ADDLIST,
     DELETEITEM,
     DELETELIST,
+    CHECKITEM
 };

@@ -18,10 +18,11 @@ import {
     Left,
     Body
 } from 'native-base';
+import Swipeout from 'react-native-swipeout';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import styles from '../styles/Styles';
 import NewListButton from '../components/NewListButton';
-import {setLists} from '../actions/actions';
+import {setLists, deleteList} from '../actions/actions';
 
 var self;
 
@@ -52,7 +53,14 @@ class HomeScreen extends Component {
             <Content>
             <List dataArray={this.props.lists}
                 renderRow={(item) => {
+                    var swipeoutButtons = [{
+                        text: 'Delete',
+                        onPress: () => {this.props.dispatchDeleteList(item)}
+                    }]
                     return(
+                        <Swipeout right={swipeoutButtons}
+                        autoClose={true}
+                        backgroundColor='transparent'>
                         <ListItem 
                         onPress={() => this.props.navigation.navigate('ListScreen', {list: item})}>
                             <Left>
@@ -77,6 +85,7 @@ class HomeScreen extends Component {
                                 <Icon name="chevron-right"/>
                             </Right>
                         </ListItem>
+                        </Swipeout>
                     );
                 }}/>
             </Content>
@@ -93,7 +102,8 @@ const mapStateToProps = (state) => {
 
 function mapDispatchToProps(dispatch) {
     return {
-        dispatchSetLists: () => dispatch(setLists())
+        dispatchSetLists: () => dispatch(setLists()),
+        dispatchDeleteList: (list) => dispatch(deleteList(list))
     };
 }
 

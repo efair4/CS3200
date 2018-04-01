@@ -4,7 +4,7 @@ import {
     ADDITEM,
     DELETEITEM,
     DELETELIST,
-    POPSCREEN
+    CHECKITEM
 } from './constants';
 
 export function setLists(lists) {
@@ -42,4 +42,12 @@ export function deleteItem(list, item) {
         listId: list.id,
         item: item
     };
+}
+
+export function checkItem(list, item) {
+    return {
+        type: CHECKITEM,
+        listId: list.id,
+        item: item
+    }
 }

@@ -111,8 +111,9 @@ class CreateListScreen extends Component {
             self._launchAlert('No Icon!', 'Please select an icon for your list');
         }
         else {
-            self.props.dispatchAddList(new List(self.state.listName, self.state.icon, self.state.dateCreated));
-            navigation.goBack();
+            var newList = new List(self.state.listName, self.state.icon, self.state.dateCreated);
+            self.props.dispatchAddList(newList);
+            navigation.navigate('ListScreen', {list: newList});
         }
     }
 

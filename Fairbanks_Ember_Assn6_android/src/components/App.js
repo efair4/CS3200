@@ -57,7 +57,7 @@ class App extends Component {
 
 	render() {
 		if(this.props.loadingLists == true) {
-			return <Text style={styles.message}> Grabbing your lists...</Text>
+			return <Text style={styles.grabListMessage}> Grabbing your lists...</Text>
 		}
 		else {
 			return (

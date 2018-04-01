@@ -13,6 +13,12 @@ export default StyleSheet.create({
         textAlign: 'center',
         marginTop: 70
     },
+    grabListMessage: {
+        fontSize: 35,
+        alignSelf: 'center',
+        textAlign: 'center',
+        marginTop: 200
+    },
     chooseIconImage: {
         margin: 0
     },
@@ -21,6 +27,21 @@ export default StyleSheet.create({
     },
     newItemTextInput: {
         fontSize: 15,
+    },
+    uncheckedItem: {
+        fontSize: 20,
+        alignSelf: 'flex-start',
+        textAlign: 'left',
+        color: 'black',
+        margin: 5
+    },
+    checkedItem: {
+        fontSize: 20,
+        alignSelf: 'flex-start',
+        textAlign: 'left',
+        color: 'gray',
+        margin: 5,
+        textDecorationLine: 'line-through'
     },
     listIcon: {
         height: 10,
