@@ -1,5 +1,6 @@
 import { AsyncStorage } from 'react-native';
 import { 
+    SETLISTS,
     ADDITEM,
     ADDLIST,
     DELETEITEM,
@@ -8,6 +9,7 @@ import {
 
 let initialState = {
     lists: [],
+    loadingLists: true,
     imagePaths: [
         require('../images/Batman.jpg'),
         require('../images/images-5.jpg'),
@@ -25,40 +27,41 @@ let initialState = {
 
 export default function(state = initialState, action) {
     switch(action.type) {
+        case SETLISTS:
+            return{lists: action.lists, loadingLists: false, imagePaths: state.imagePaths};
         case ADDLIST:
             var newLists = JSON.parse(JSON.stringify(state.lists));
             var listObject = action.list.getListObject();
+            console.log('list object');
+            console.log(listObject);
             newLists.push(listObject);
-            AsyncStorage.mergeItem('lists', JSON.stringify(listObject[0]))
-            .then((response) => response.json())
-            .then((responseJson) => {
-                JSON.parse(AsyncStorage.getItem('lists'))
-                .then((response) => {
-
-                })
-            })
-            .catch((error) => {
-                console.error(error);
-            });
+            AsyncStorage.setItem('lists', JSON.stringify(newLists))
             return {lists: newLists, imagePaths: state.imagePaths};
         case ADDITEM:
-                if(action.item.length === 0)  {return state;}
-                var listToEdit = JSON.parse(JSON.stringify(state.lists.find(list => list.id === action.listId)));
-                var index = state.lists.indexOf(listToEdit);
-                listToEdit.listItems.push(action.item);
-                state.lists[index] = listToEdit;
-                return {lists: state.lists, imagePaths: state.imagePaths};
+            if(action.item.length === 0)  {return state;}
+            var listToEdit = JSON.parse(JSON.stringify(state.lists.find(list => list.id === action.listId)));
+            var index = state.lists.findIndex(list => list.id == listToEdit.id);
+            listToEdit.listItems.push(action.item);
+            var stateCopy = JSON.parse(JSON.stringify(state.lists));
+            stateCopy.lists[index] = listToEdit;
+            AsyncStorage.setItem('lists', JSON.stringify(stateCopy.lists))
+            return {lists: stateCopy.lists, imagePaths: state.imagePaths};
+        case DELETELIST:
+            var listIndex = state.lists.findIndex(list => list.id == listToEdit.id);
+            var stateCopy = JSON.parse(JSON.stringify(state.lists));
+            stateCopy.lists.splice(listIndex, 1);
+            AsyncStorage.setItem('lists', JSON.stringify(stateCopy.lists));
+            return {lists: stateCopy.lists, imagePaths: state.imagePaths};
         case DELETEITEM:
-            return {lists: () => {
-                var listToEdit = state.lists.find(list => list.id === action.listId);
-                var itemIndex = listToEdit.indexOf(action.item);
-                listToEdit.splice(itemIndex,1);
-                var listIndex = state.lists.indexOf(listToEdit);
-                state.lists[listIndex] = listToEdit;
-                return state.lists;
-            }}
+            var listToEdit = state.lists.find(list => list.id === action.listId);
+            var itemIndex = listToEdit.findIndex(item => item.id == action.item.id);
+            listToEdit.splice(itemIndex,1);
+            var listIndex = state.lists.findIndex(list => list.id == listToEdit.id);
+            var stateCopy = JSON.parse(JSON.stringify(state.lists));
+            stateCopy.lists[listIndex] = listToEdit;
+            AsyncStorage.setItem('lists', JSON.stringify(stateCopy.lists))
+            return {lists: stateCopy.lists, imagePaths: state.imagePaths};
         default:
             return state;
     };
 };
- 

@@ -1,5 +1,5 @@
 import {
-    NAVIGATE,
+    SETLISTS,
     ADDLIST,
     ADDITEM,
     DELETEITEM,
@@ -7,10 +7,10 @@ import {
     POPSCREEN
 } from './constants';
 
-export function navigate(screen) {
+export function setLists(lists) {
     return {
-        type: NAVIGATE,
-        screen: screen
+        type: SETLISTS,
+        lists: lists
     };
 }
 

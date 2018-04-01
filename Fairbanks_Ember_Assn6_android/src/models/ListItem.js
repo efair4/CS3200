@@ -1,13 +1,13 @@
 import keyKeeper from '../utils/KeyKeeper';
 
 export class ListItem {
-    constructor(item, id) {
-        this.item = item;
-        this.id = id;
+    constructor(name) {
+        this.name = name;
+        this.id = keyKeeper.getKey();
         this.checked = false;
     }
 
     getItem() {
-        return {item: this.item, id: this.id, checked: this.checked}
+        return {name: this.name, id: this.id, checked: this.checked}
     }
 } 

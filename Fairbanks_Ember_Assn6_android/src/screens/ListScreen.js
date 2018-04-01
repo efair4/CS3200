@@ -21,7 +21,7 @@ import {
 } from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import styles from '../styles/Styles';
-import NewListButton from '../components/NewListButton';
+import ListItem from '../models/ListItem';
 import {addItem, deleteItem} from '../actions/actions';
 
 class ListScreen extends Component {
@@ -57,18 +57,19 @@ class ListScreen extends Component {
                             <Left>
                                 <CheckBox 
                                     onPress={() => this.onCheckPress(item)}
-                                    checked={this.props.list.checked}/>
+                                    checked={item.checked}/>
                             </Left>
                             <Body>
                                 <Text  
                                     style={styles.listItem}
                                 >
-                                    {item.listName}
+                                    {item.name}
                                 </Text>
                             </Body>
                             <Right>
                                 <Icon 
                                     name="times-circle"
+                                    size={30}
                                     onPress={() => this.props.dispatchDeleteItem(this.props.list, item)}/>
                             </Right>
                         </ListItem>
@@ -82,7 +83,7 @@ class ListScreen extends Component {
                 onChangeText={(val) => this.setState({item: val})}
                 onSubmitEditing={() => {
                     this.setState({item: ''});
-                    this.props.dispatchAddItem(this.props.list, this.state.item)}
+                    this.props.dispatchAddItem(this.props.list, new ListItem(this.state.item))}
                 }
             />
         </Content>

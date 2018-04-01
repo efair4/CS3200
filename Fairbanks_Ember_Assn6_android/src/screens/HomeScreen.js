@@ -21,6 +21,7 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome';
 import styles from '../styles/Styles';
 import NewListButton from '../components/NewListButton';
+import {setLists} from '../actions/actions';
 
 var self;
 
@@ -34,6 +35,7 @@ class HomeScreen extends Component {
     }
 
     componentDidMount() {
+        // this.props.dispatchSetLists();
         self = this;
     }
 
@@ -91,6 +93,7 @@ const mapStateToProps = (state) => {
 
 function mapDispatchToProps(dispatch) {
     return {
+        dispatchSetLists: () => dispatch(setLists())
     };
 }
 
