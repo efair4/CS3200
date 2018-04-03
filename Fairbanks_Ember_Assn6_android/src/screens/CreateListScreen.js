@@ -168,7 +168,7 @@ const mapStateToProps = (state) => {
 
 function mapDispatchToProps(dispatch) {
     return {
-        dispatchAddList: (list) => dispatch(addList(list))
+        dispatchAddList: (list) => dispatch(addList(list)),
     };
 }
 

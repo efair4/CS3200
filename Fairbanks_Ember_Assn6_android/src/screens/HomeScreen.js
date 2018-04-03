@@ -8,6 +8,7 @@ import {
     TouchableOpacity,
     FlatList,
     Image,
+    Alert,
     View
 } from 'react-native';
 import {
@@ -31,12 +32,11 @@ class HomeScreen extends Component {
         return {
             headerStyle: {backgroundColor: '#2097F4'},
             headerTitleStyle: {color: 'white'},
-            headerRight: <NewListButton navigation={navigation} refreshHomeScreen={() => self.forceUpdate()}/>,
+            headerRight: <NewListButton navigation={navigation}/>,
         }
     }
 
     componentDidMount() {
-        // this.props.dispatchSetLists();
         self = this;
     }
 
@@ -55,14 +55,15 @@ class HomeScreen extends Component {
                 renderRow={(item) => {
                     var swipeoutButtons = [{
                         text: 'Delete',
-                        onPress: () => {this.props.dispatchDeleteList(item)}
+                        onPress: () => {this._launchAlert(item)}
                     }]
                     return(
                         <Swipeout right={swipeoutButtons}
                         autoClose={true}
                         backgroundColor='transparent'>
                         <ListItem 
-                        onPress={() => this.props.navigation.navigate('ListScreen', {list: item})}>
+                        onPress={() => this.props.navigation.navigate('ListScreen', {list: item})}
+                        >
                             <Left>
                                 <Image
                                     style={styles.listIcon} 
@@ -89,6 +90,18 @@ class HomeScreen extends Component {
                     );
                 }}/>
             </Content>
+        );
+    }
+
+    _launchAlert(list) {
+        Alert.alert(
+            'Confirm Delete',
+            'Would you really like to delete the list \'' + list.listName + '\'?',
+                [
+                    {text: 'Cancel', onPress: null},
+                    {text: 'Delete', onPress: () => this.props.dispatchDeleteList(list)},
+                ],
+                {cancelable: false}
         );
     }
 }

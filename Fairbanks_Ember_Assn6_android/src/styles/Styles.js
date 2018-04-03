@@ -26,14 +26,17 @@ export default StyleSheet.create({
         fontSize: 30,
     },
     newItemTextInput: {
-        fontSize: 15,
+        fontSize: 20,
+        margin: 10,
+        width: 350
     },
     uncheckedItem: {
         fontSize: 20,
+        justifyContent: 'flex-start',
         alignSelf: 'flex-start',
         textAlign: 'left',
         color: 'black',
-        margin: 5
+        marginLeft: -100 
     },
     checkedItem: {
         fontSize: 20,

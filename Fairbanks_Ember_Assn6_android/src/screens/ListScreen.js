@@ -8,6 +8,7 @@ import {
     TouchableOpacity,
     FlatList,
     TextInput,
+    Alert,
     View
 } from 'react-native';
 import {
@@ -19,7 +20,7 @@ import {
     Body,
     CheckBox
 } from 'native-base';
-import Icon from 'react-native-vector-icons/Feather';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import styles from '../styles/Styles';
 import BackHomeButton from '../components/BackHomeButton';
 import {CustomListItem} from '../models/CustomListItem';
@@ -35,8 +36,8 @@ class ListScreen extends Component {
     }
     componentDidMount() {
         this.props.navigation.setParams({screenTitle: this.props.list.listName});
-
     }
+
     static navigationOptions = ({ navigation }) => {
         return {
             title: navigation.state.params.screenTitle,
@@ -69,9 +70,9 @@ class ListScreen extends Component {
                                 </Body>
                                 <Right>
                                     <Icon 
-                                        name="times-circle"
+                                        name='times-circle'
                                         size={25}
-                                        onPress={() => this.props.dispatchDeleteItem(this.props.list, item)}/>
+                                        onPress={() => this._launchAlert(this.props.list, item)}/>
                                 </Right>
                             </ListItem>
                         );
@@ -80,14 +81,22 @@ class ListScreen extends Component {
                         return null;
                     }
                 }}/>
+                <View style={{flex: 1, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', width: 300}}>
                  <TextInput
+                ref={c => this.textInputRef=c} 
                 style={styles.newItemTextInput}
                 keyboadType='default'
                 placeholder='Add a New Item'
-                keyboardShouldPersistTaps='never'
+                keyboardShouldPersistTaps='never' 
+                enablesReturnKeyAutomatically={true}          
                 onChangeText={(val) => this.setState({item: val})}
                 onSubmitEditing={() => this.itemSubmitted()}
                  />
+                 <Icon 
+                        name="times-circle"
+                        size={this.state.item.length != 0 ? 25: 0}
+                        onPress={() => {this.setState({item: ""}); this.textInputRef.clear()}}/>
+                </View>
                 <List 
                 keyboardDismissMode='on-drag'
                 dataArray={this.props.list.listItems}
@@ -109,7 +118,7 @@ class ListScreen extends Component {
                                     <Icon 
                                         name="times-circle"
                                         size={25}
-                                        onPress={() => this.props.dispatchDeleteItem(this.props.list, item)}/>
+                                        onPress={() => this._launchAlert(this.props.list, item)}/>
                                 </Right>
                             </ListItem>
                         );
@@ -124,10 +133,21 @@ class ListScreen extends Component {
         );
     }
 
+    _launchAlert(list, item) {
+        Alert.alert(
+            'Confirm Delete',
+            'Would you really like to delete \'' + item.name + '\'?',
+                [
+                    {text: 'Cancel', onPress: null},
+                    {text: 'Delete', onPress: () => this.props.dispatchDeleteItem(list, item)},
+                ],
+                {cancelable: false}
+        );
+    }
+
     itemSubmitted() {
-        console.log(this.state.item);
         this.setState({item: ""});
-        console.log(this.state.item);
+        this.textInputRef.clear();
         this.props.dispatchAddItem(this.props.list, new CustomListItem(this.state.item));
     }
 }

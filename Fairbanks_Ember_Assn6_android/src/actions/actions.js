@@ -1,5 +1,6 @@
 import {
     SETLISTS,
+    SETCURRENTLIST,
     ADDLIST,
     ADDITEM,
     DELETEITEM,
@@ -11,6 +12,19 @@ export function setLists(lists) {
     return {
         type: SETLISTS,
         lists: lists
+    };
+}
+
+export function setCurrentList(list) {
+    return {
+        type: SETCURRENTLIST,
+        list: list
+    };
+}
+
+export function getCurrentList() {
+    return {
+        type: GETCURRENTLIST
     };
 }
 

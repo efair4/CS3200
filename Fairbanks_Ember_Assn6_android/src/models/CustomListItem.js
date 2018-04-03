@@ -7,11 +7,6 @@ export class CustomListItem {
         this.checked = false;
     }
 
-    setChecked() {
-        this.checked = !this.checked;
-        return this.checked;
-    }
-
     getItem() {
         return {name: this.name, id: this.id, checked: this.checked}
     }

@@ -55,23 +55,19 @@ export default function(state = initialState, action) {
             return {lists: stateListsCopy, imagePaths: state.imagePaths};
 
         case DELETEITEM:
-            var listToEdit = state.lists.find(list => list.id === action.listId);
-            var itemIndex = listToEdit.listItems.indexOf(action.item);
-            listToEdit.listItems.splice(itemIndex,1);
-            var listIndex = state.lists.findIndex(list => list.id == listToEdit.id);
-            state.lists[listIndex] = listToEdit;
+            var listInfo = getItemInfo(action, state);
+            listInfo.listToEdit.listItems.splice(listInfo.itemIndex,1);
+            state.lists[listInfo.listIndex] = listInfo.listToEdit;
             stateListsCopy = JSON.parse(JSON.stringify(state.lists));
             AsyncStorage.setItem('lists', JSON.stringify(state.lists))
             return {lists: stateListsCopy, imagePaths: state.imagePaths};
 
         case CHECKITEM:
-            var listToEdit = state.lists.find(list => list.id === action.listId);
-            var itemIndex = listToEdit.listItems.findIndex(item => item.id == action.item.id);
+            var listInfo = getItemInfo(action, state);
             var checked = action.item.checked;
             action.item.checked = !checked;
-            listToEdit.listItems[itemIndex] = action.item;
-            var listIndex = state.lists.findIndex(list => list.id == listToEdit.id);
-            state.lists[listIndex] = listToEdit;
+            listInfo.listToEdit.listItems[listInfo.itemIndex] = action.item;
+            state.lists[listInfo.listIndex] = listInfo.listToEdit;
             stateListsCopy = JSON.parse(JSON.stringify(state.lists));
             AsyncStorage.setItem('lists', JSON.stringify(state.lists))
             return {lists: stateListsCopy, imagePaths: state.imagePaths};
@@ -80,3 +76,10 @@ export default function(state = initialState, action) {
             return state;
     };
 };
+
+getItemInfo = function(action, state) {
+    var listToEdit = state.lists.find(list => list.id === action.listId);
+    var itemIndex = listToEdit.listItems.indexOf(action.item);
+    var listIndex = state.lists.findIndex(list => list.id == listToEdit.id);
+    return {listToEdit: listToEdit, itemIndex: itemIndex, listIndex: listIndex};
+}
