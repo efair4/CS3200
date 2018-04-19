@@ -13,14 +13,17 @@ import {
 import {
 	StackNavigator,
 	TabNavigator,
-	NavigationActions
+	NavigationActions,
+	TabBarBottom
 } from 'react-navigation';
 import AwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import IonIcon from 'react-native-vector-icons/Ionicons';
 import OctIcon from 'react-native-vector-icons/Octicons';
 import EvilIcon from 'react-native-vector-icons/EvilIcons';
 import MatComIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+
 import styles from '../styles/Styles';
+
 import HomeScreen from '../screens/HomeScreen';
 import AddActivityScreen from '../screens/AddActivityScreen';
 import EditActivityScreen from '../screens/EditActivityScreen';
@@ -91,34 +94,47 @@ const RootTab = TabNavigator({
 	HomeTab: {
 		screen: HomeTab,
 		navigationOptions: {
-			title: 'Home',
-			icon: <OctIcon name='home'/>
+			tabBarLabel: 'Home',
+			tabBarIcon: ({tintColor}) => {
+				return <OctIcon name='home' size={25} color={tintColor}/>
+			}
 		}
 	},
 	HistoryTab: {
 		screen: HistoryTab,
 		navigationOptions: {
-			title: 'History',
-			icon: <MatComIcon name='history'/>
+			tabBarLabel: 'History',
+			tabBarIcon: ({tintColor}) => {
+				return <MatComIcon name='history' size={25} color={tintColor}/>
+			}
 		}
 	},
 	RewardsTab: {
 		screen: RewardsTab,
 		navigationOptions: {
-			title: 'Trophies',
-			icon: <EvilIcon name='trophy'/>
+			tabBarLabel: 'Trophies',
+			tabBarIcon: ({tintColor}) => {
+				return <EvilIcon name='trophy' size={25} color={tintColor}/>
+			}
 		}
 	},
 	SettingsTab: {
 		screen: SettingsTab,
 		navigationOptions: {
-			title: 'Settings',
-			icon: <EvilIcon name='gear'/>
+			tabBarLabel: 'Settings',
+			tabBarIcon: ({tintColor}) => {
+				return <EvilIcon name='gear' size={25} color={tintColor}/>
+			}
 		}
 	}
 },
 {
-	tabBarPosition: 'bottom'
+	tabBarComponent: TabBarBottom,
+	tabBarPosition: 'bottom',
+	tabBarOptions: {
+		showIcon: true,
+		showLabel: true
+	}
 });
 
 export default class App extends Component {

@@ -23,8 +23,15 @@ import styles from '../styles/Styles';
 class HomeScreen extends Component {
     render() {
         return (
-            <View style={styles.container}>
+            <View style={styles.homeContainer}>
                 {this.props.recentActivities.length != 0 ? this._renderRecents() : <Text> You don't have any recent trips. Tap the button below to add one! </Text>}
+                <TouchableOpacity style={styles.addActivityButton}
+                onPress={() => this.props.navigation.navigate('AddActivityScreen')}
+                >
+                    <Text style={styles.addActivityText}>
+                        Add a Trip Saving Activity!
+                    </Text>
+                </TouchableOpacity>
             </View>
         )
     }

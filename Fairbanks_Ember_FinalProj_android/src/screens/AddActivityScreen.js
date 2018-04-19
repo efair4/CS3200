@@ -4,7 +4,7 @@ import {
     Platform,
     Text,
     TouchableOpacity,
-    FlatList,
+    TextInput,
     Image,
     Alert,
     View
@@ -17,33 +17,16 @@ import {
     Left,
     Body
 } from 'native-base';
-
+import CameraKitCamera from 'react-native-camera-kit';
 import styles from '../styles/Styles';
 
 class AddActivityScreen extends Component {
     render() {
         return (
             <View style={styles.container}>
-                {this.props.recentActivities.length != 0 ? this._renderRecents() : <Text> You don't have any recent trips. Tap the button below to add one! </Text>}
+                          
             </View>
         )
-    }
-
-    _renderRecents() {
-        return(
-            <Content>
-                <List dataArray={this.props.recentActivities}
-                    renderRow={(item) => {
-                        return(
-                            <ListItem 
-                                onPress={() => this.props.navigation.navigate('EditActivityScreen', {activity: item})}
-                            >
-                            </ListItem>
-                        )
-                    }}
-                />
-            </Content>
-        );
     }
 }
 
