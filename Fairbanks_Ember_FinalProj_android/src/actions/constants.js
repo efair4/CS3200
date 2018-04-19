@@ -1,0 +1,5 @@
+const ADDACTIVITY = 'ADDACTIVITY';
+
+export {
+    ADDACTIVITY
+};
