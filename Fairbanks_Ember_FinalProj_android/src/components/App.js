@@ -23,6 +23,7 @@ import EvilIcon from 'react-native-vector-icons/EvilIcons';
 import MatComIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import styles from '../styles/Styles';
+import colors from '../utils/Colors';
 
 import HomeScreen from '../screens/HomeScreen';
 import AddActivityScreen from '../screens/AddActivityScreen';
@@ -133,7 +134,8 @@ const RootTab = TabNavigator({
 	tabBarPosition: 'bottom',
 	tabBarOptions: {
 		showIcon: true,
-		showLabel: true
+		showLabel: true,
+		activeTintColor: colors.PROCESS
 	}
 });
 

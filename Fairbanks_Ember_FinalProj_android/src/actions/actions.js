@@ -1,5 +1,6 @@
 import {
-    ADDACTIVITY
+    ADDACTIVITY,
+    SAVESETTINGS,
 } from './constants';
 
 export function addActivity(activity) {
@@ -7,4 +8,13 @@ export function addActivity(activity) {
         type: ADDACTIVITY,
         activity: activity
     };
+}
+
+export function saveSettings(name, address, goals) {
+    return {
+        type: SAVESETTINGS,
+        name: name,
+        address: address,
+        goals: goals
+    }
 }

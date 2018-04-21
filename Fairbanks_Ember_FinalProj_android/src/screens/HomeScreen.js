@@ -24,7 +24,7 @@ class HomeScreen extends Component {
     render() {
         return (
             <View style={styles.homeContainer}>
-                {this.props.recentActivities.length != 0 ? this._renderRecents() : <Text> You don't have any recent trips. Tap the button below to add one! </Text>}
+                {this.props.recentActivities.length != 0 ? this._renderRecents() : <Text style={styles.infoText}> You don't have any recent trips. Tap the button below to add one! </Text>}
                 <TouchableOpacity style={styles.addActivityButton}
                 onPress={() => this.props.navigation.navigate('AddActivityScreen')}
                 >

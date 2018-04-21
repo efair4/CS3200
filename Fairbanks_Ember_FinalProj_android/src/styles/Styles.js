@@ -1,49 +1,64 @@
 import { StyleSheet } from 'react-native';
-// import TAN from '../utils/Colors';
-// import ORANGE from '../utils/Colors';
-// import BROWN from '../utils/Colors';
-// import YELLOW from '../utils/Colors';
-// import PURPLE from '../utils/Colors';
-// import PINK from '../utils/Colors';
-// import SPOT from '../utils/Colors';
-// import PROCESS from '../utils/Colors';
-// import DIGITAL from '../utils/Colors';
-
-const TAN = '#f1e3c5';
-const ORANGE = '#d4451d';
-const BROWN = '#663334';
-const YELLOW = '#ffce71';
-const PURPLE = '#6d276a';
-const PINK = '#e7417a';
-
-const SPOT = '#00778B';
-const PROCESS = '#00cfc4';
-const DIGITAL = '#008da8';
+import GLOBALCOLORS from "../utils/Colors";
 
 export default StyleSheet.create({
 	container: {
 		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center',
-		backgroundColor: '#F5FCFF',
-		margin: 10
+		padding: 10
 	},
 	homeContainer: {
 		flex: 1,
 		justifyContent: 'flex-start',
 		alignItems: 'center',
-		backgroundColor: '#F5FCFF',
+		padding: 10
+	},
+	settingsContainer: {
+		flex: 1, 
+		justifyContent: 'flex-start',
+		alignItems: 'flex-start',
+		padding: 10
+	},
+	settingsInfoText: {
+		fontSize: 25,
+		color: 'black',
+		textAlign: 'left'
+	},
+	infoText: {
+		fontSize: 30,
+		color: 'black',
+		textAlign: 'center'
 	},
 	addActivityButton: {
 		width: '50%',
-		height: 50,
-		backgroundColor: YELLOW,
+		height: 65,
+		backgroundColor: GLOBALCOLORS.YELLOW,
 		justifyContent: 'center',
-		borderRadius: 6
+		borderRadius: 6,
+		padding: 5,
+		margin: 10
 	},
 	addActivityText: {
 		textAlign: 'center',
 		alignSelf: 'center',
-		fontFamily: 'sans-serif-bold'
+		fontFamily: 'sans-serif-bold',
+		fontSize: 20,
+		color: 'black'
 	},
+	editButtonText: {
+		color: 'black',
+		fontFamily: 'sans-serif-bold',
+		fontSize: 20
+	},
+	saveButtonText: {
+		color: GLOBALCOLORS.DIGITAL,
+		fontFamily: 'sans-serif-bold',
+		fontSize: 20
+	},
+	settingsInput: {
+		fontSize: 25,
+		width: '100%',
+		color: 'black'
+	}
 });
