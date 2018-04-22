@@ -66,33 +66,29 @@ export default StyleSheet.create({
 	},
 	editSettingsInputView: {
 		width: '100%',
-		backgroundColor: 'lightgray',
+		backgroundColor: 'white',
 		borderRadius: 3,
 		borderWidth: 2, 
 		borderColor: 'black',
-		marginTop: 5,
-		marginBottom: 10
 	},
 	noEditSettingsInputView: {
 		width: '100%',
-		marginTop: 5,
-		marginBottom: 10,
-		borderBottomWidth: 2,
+		borderBottomWidth: 0,
 		borderBottomColor: 'black'
 	},
 	settingsInput: {
-		fontSize: 20,
+		fontSize: 18,
 		width: '100%',
 		color: 'black',
+		textAlign: 'right'
 	},
 	settingsHeader: {
-		fontSize: 23,
-		textDecorationLine: 'underline',
+		fontSize: 21,
 		fontWeight: '500',
 		color: 'black'
 	},
 	settingsSubheader: {
-		fontSize: 20,
+		fontSize: 19,
 		color: 'black'
 	},
 	scrollContentView: {

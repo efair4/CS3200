@@ -17,31 +17,31 @@ import {
     Left,
     Body
 } from 'native-base';
+import { ProgressCircle } from 'react-native-svg-charts';
+import GLOBALCOLORS from '../utils/Colors';
 
 import styles from '../styles/Styles';
 
 class RewardsScreen extends Component {
     render() {
         return (
-            <View style={styles.container}>
-                {this.props.recentActivities.length != 0 ? this._renderRecents() : <Text> You don't have any recent trips. Tap the button below to add one! </Text>}
-            </View>
-        )
-    }
-
-    _renderRecents() {
-        return(
             <Content>
-                <List dataArray={this.props.recentActivities}
-                    renderRow={(item) => {
-                        return(
-                            <ListItem 
-                                onPress={() => this.props.navigation.navigate('EditActivityScreen', {activity: item})}
-                            >
-                            </ListItem>
-                        )
-                    }}
-                />
+                <List>
+                    <ListItem>
+                        <Left>
+                            <Image source={require('../images/trophy1.jpg')}>
+                                <ProgressCircle
+                                    style={{height: 30}}
+                                    progress={(this.props.tripsSaved/10) <= 1 ? this.props.tripsSaved/10 : 1}
+                                    progressColor={GLOBALCOLORS.PINK}
+                                />
+                            </Image>
+                        </Left>
+                        <Body>
+                            <Text>10 Trips Saved</Text>
+                        </Body>
+                    </ListItem>
+                </List>
             </Content>
         );
     }
@@ -49,7 +49,7 @@ class RewardsScreen extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        recentActivities: state.recentActivities
+        tripsSaved: state.tripsSaved
     };
 }
 

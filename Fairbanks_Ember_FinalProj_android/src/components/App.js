@@ -92,14 +92,6 @@ const SettingsTab = StackNavigator({
 			headerStyle: {backgroundColor: navBarColor},
 			headerTitleStyle: {color: titleColor}
 		}
-	},
-	AboutScreen: {
-		screen: AboutScreen,
-		navigationOptions: {
-			title: 'About the App',
-			headerStyle: {backgroundColor: navBarColor},
-			headerTitleStyle: {color: titleColor}
-		}
 	}
 },
 {
@@ -111,6 +103,20 @@ const RewardsTab = StackNavigator({
 		screen: RewardsScreen,
 		navigationOptions: {
 			title: 'Trophies',
+			headerStyle: {backgroundColor: navBarColor},
+			headerTitleStyle: {color: titleColor}
+		}
+	}
+},
+{
+	initialRouteName: 'Home'
+});
+
+const AboutTab = StackNavigator({
+	Home: {
+		screen: AboutScreen,
+		navigationOptions: {
+			title: 'About the App',
 			headerStyle: {backgroundColor: navBarColor},
 			headerTitleStyle: {color: titleColor}
 		}
@@ -157,6 +163,15 @@ const RootTab = TabNavigator({
 				return <EvilIcon name='gear' size={25} color={tintColor}/>
 			}
 		}
+	},
+	AboutTab: {
+		screen: AboutTab,
+		navigationOptions: {
+			tabBarLabel: 'About',
+			tabBarIcon: ({tintColor}) => {
+				return <MatComIcon name='information-outline' size={25} color={tintColor}/>
+			}
+		}
 	}
 },
 {
@@ -171,7 +186,7 @@ const RootTab = TabNavigator({
 
 class App extends Component {
 	componentWillMount() {
-		AsyncStorage.multiGet(['recentActivities', 'allActivities', 'username', 'address', 'goals'])
+		AsyncStorage.multiGet(['recentActivities', 'allActivities', 'username', 'address', 'goals', 'tripsSaved'])
 		.then((response) => {
 			var info = [];
 			for(i = 0; i < response.length; i++) {

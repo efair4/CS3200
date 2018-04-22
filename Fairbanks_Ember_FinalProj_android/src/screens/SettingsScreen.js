@@ -12,12 +12,12 @@ import {
     View
 } from 'react-native';
 import {
-	Content,
+    Container,
+    Content,
+    Header,
 	List,
     ListItem,
-    Right,
-    Left,
-    Body
+    Separator
 } from 'native-base';
 
 import styles from '../styles/Styles';
@@ -64,91 +64,112 @@ class SettingsScreen extends Component {
 
     render() {
         return (
-            <ScrollView 
-                style={styles.settingsScrollView}
-                contentContainerStyle={styles.scrollViewContent}>
-                <Text style={styles.settingsInfoText}>
-                    Personal Information and Goals 
-                </Text>
-                <Text style={styles.settingsHeader}>
-                    Name
-                </Text>
-                <View style={this.state.textInputStyle}>
-                    <TextInput style={styles.settingsInput}
-                        placeholder='Name'
-                        value={this.state.nameVal}
-                        autoFocus={true}
-                        keyboardType = 'default'
-                        underlineColorAndroid='transparent'
-                        keyboardShouldPersistTaps='never'
-                        editable={this.state.editable}
-                        onChangeText = {(val) => this.setState({nameVal: val})}
-                    />
-                </View>
-                <Text style={styles.settingsHeader}>
-                    Address
-                </Text>
-                <View style={this.state.textInputStyle}>
-                    <TextInput style={styles.settingsInput}
-                        placeholder='Address'
-                        value={this.state.addressVal}
-                        autoFocus={true}
-                        keyboardType = 'default'
-                        underlineColorAndroid='transparent'
-                        keyboardShouldPersistTaps='never'
-                        editable={this.state.editable}
-                        onChangeText = {(val) => this.setState({addressVal: val})}
-                    />
-                </View>
-                <Text style={styles.settingsHeader}>
-                    Goals
-                </Text>
-                <Text style={styles.settingsSubheader}>
-                    How many total trips do you want to save each week?
-                </Text>
-                <View style={this.state.textInputStyle}>
-                    <TextInput style={styles.settingsInput}
-                        placeholder='Enter some number of trips'
-                        value={String(this.state.totalTripsVal)}
-                        autoFocus={true}
-                        keyboardType = 'default'
-                        underlineColorAndroid='transparent'
-                        keyboardShouldPersistTaps='never'
-                        editable={this.state.editable}
-                        onChangeText = {(val) => this.setState({totalTripsVal: val})}
-                    />
-                </View>
-                <Text style={styles.settingsSubheader}>
-                    How many trips do you want to save by using active transportation each week?
-                </Text>
-                <View style={this.state.textInputStyle}>
-                    <TextInput style={styles.settingsInput}
-                        placeholder='Enter some number of trips'
-                        value={String(this.state.activeTripsVal)}
-                        autoFocus={true}
-                        keyboardType = 'default'
-                        underlineColorAndroid='transparent'
-                        keyboardShouldPersistTaps='never'
-                        editable={this.state.editable}
-                        onChangeText = {(val) => this.setState({activeTripsVal: val})}
-                    />
-                </View>
-                <Text style={styles.settingsSubheader}>
-                    How many trips do you want to save by using public transportation each week?
-                </Text>
-                <View style={this.state.textInputStyle}>
-                    <TextInput style={styles.settingsInput}
-                        placeholder='Enter some number of trips'
-                        value={String(this.state.pubTripsVal)}
-                        autoFocus={true}
-                        keyboardType = 'default'
-                        underlineColorAndroid='transparent'
-                        keyboardShouldPersistTaps='never'
-                        editable={this.state.editable}
-                        onChangeText = {(val) => this.setState({pubTripsVal: val})}
-                    />
-                </View>
-            </ScrollView>
+            <Container style={{backgroundColor: 'white'}}>
+                <Content>
+                    <List>
+                        <Separator bordered>            
+                            <Text style={styles.settingsHeader}>
+                                Name
+                            </Text>
+                        </Separator>
+                        <ListItem>
+                            <View style={this.state.textInputStyle}>
+                                <TextInput style={styles.settingsInput}
+                                    placeholder='Name'
+                                    value={this.state.nameVal}
+                                    autoFocus={true}
+                                    keyboardType = 'default'
+                                    underlineColorAndroid='transparent'
+                                    keyboardShouldPersistTaps='never'
+                                    editable={this.state.editable}
+                                    onChangeText = {(val) => this.setState({nameVal: val})}
+                                />
+                            </View>
+                        </ListItem>
+                        <Separator bordered>            
+                            <Text style={styles.settingsHeader}>
+                                Address
+                            </Text>
+                        </Separator>
+                        <ListItem>
+                            <View style={this.state.textInputStyle}>
+                                <TextInput style={styles.settingsInput}
+                                    placeholder='Address'
+                                    value={this.state.addressVal}
+                                    autoFocus={true}
+                                    keyboardType = 'default'
+                                    underlineColorAndroid='transparent'
+                                    keyboardShouldPersistTaps='never'
+                                    editable={this.state.editable}
+                                    onChangeText = {(val) => this.setState({addressVal: val})}
+                                />
+                            </View>
+                        </ListItem>
+                        <Separator bordered >
+                            <Text style={styles.settingsHeader}>
+                                Goals
+                            </Text>
+                        </Separator>
+                        <ListItem itemDivider>
+                            <Text style={styles.settingsSubheader}>
+                                How many total trips do you want to save each week?
+                            </Text>
+                        </ListItem>
+                        <ListItem>
+                            <View style={this.state.textInputStyle}>
+                                <TextInput style={styles.settingsInput}
+                                    placeholder='Enter some number of trips'
+                                    value={String(this.state.totalTripsVal)}
+                                    autoFocus={true}
+                                    keyboardType = 'default'
+                                    underlineColorAndroid='transparent'
+                                    keyboardShouldPersistTaps='never'
+                                    editable={this.state.editable}
+                                    onChangeText = {(val) => this.setState({totalTripsVal: val})}
+                                />
+                            </View>
+                        </ListItem>
+                        <ListItem itemDivider>
+                            <Text style={styles.settingsSubheader}>
+                                How many trips do you want to save by using active transportation each week?
+                            </Text>
+                        </ListItem>
+                        <ListItem>
+                            <View style={this.state.textInputStyle}>
+                                <TextInput style={styles.settingsInput}
+                                    placeholder='Enter some number of trips'
+                                    value={String(this.state.activeTripsVal)}
+                                    autoFocus={true}
+                                    keyboardType = 'default'
+                                    underlineColorAndroid='transparent'
+                                    keyboardShouldPersistTaps='never'
+                                    editable={this.state.editable}
+                                    onChangeText = {(val) => this.setState({activeTripsVal: val})}
+                                />
+                            </View>
+                        </ListItem>
+                        <ListItem itemDivider>
+                            <Text style={styles.settingsSubheader}>
+                                How many trips do you want to save by using public transportation each week?
+                            </Text>
+                        </ListItem>
+                        <ListItem>
+                            <View style={this.state.textInputStyle}>
+                                <TextInput style={styles.settingsInput}
+                                    placeholder='Enter some number of trips'
+                                    value={String(this.state.pubTripsVal)}
+                                    autoFocus={true}
+                                    keyboardType = 'default'
+                                    underlineColorAndroid='transparent'
+                                    keyboardShouldPersistTaps='never'
+                                    editable={this.state.editable}
+                                    onChangeText = {(val) => this.setState({pubTripsVal: val})}
+                                />
+                            </View>
+                        </ListItem>
+                    </List>
+                </Content>
+            </Container>
         )
     }
 

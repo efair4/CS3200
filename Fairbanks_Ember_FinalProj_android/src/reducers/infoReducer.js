@@ -8,6 +8,7 @@ import {
 let initialState = {
     firstTime: true,
     loadingInfo: true,
+    tripsSaved: 4,
     recentActivities: [],
     allActivities: [],
     username: 'Ember',
@@ -22,14 +23,13 @@ export default function(state = initialState, action) {
                                 state.allActivities,
                                 state.username,
                                 state.address,
-                                state.goals];
-            //for(i = 0; i < actionInfo.length; i++) {
-                if(action.info[0] != null) {
-                    actionInfo[0] = JSON.parse(action.info[0]);
-                }
-            //}
+                                state.goals,
+                                state.tripsSaved];
+            if(action.info[0] != null) {
+                actionInfo[0] = JSON.parse(action.info[0]);
+            }                    
             if(action.info[1] != null) {
-                actionInfo[1] = JSON.parse(action.info[i]);
+                actionInfo[1] = JSON.parse(action.info[1]);
             }
             if(action.info[2] != null) {
                 actionInfo[2] = action.info[2];
@@ -40,8 +40,11 @@ export default function(state = initialState, action) {
             if(action.info[4] != null) {
                 actionInfo[4] = JSON.parse(action.info[4]);
             }
+            if(action.info[5] != null) {
+                actionInfo[5] = action.info[5];
+            }
             return {recentActivities: actionInfo[0], allActivities: actionInfo[1], 
-                username: actionInfo[2], address: actionInfo[3], goals: actionInfo[4], loadingInfo: false};
+                username: actionInfo[2], address: actionInfo[3], goals: actionInfo[4], tripsSaved: actionInfo[5], loadingInfo: false};
         case ADDACTIVITY:
             return state;
         case SAVESETTINGS: 
