@@ -91,6 +91,10 @@ export default StyleSheet.create({
 		fontSize: 19,
 		color: 'black'
 	},
+	rewardItemText: {
+		fontSize: 20,
+		color: 'black'
+	},
 	scrollContentView: {
 		alignSelf: 'stretch'
 	}

@@ -5,7 +5,7 @@ import {
     Text,
     TouchableOpacity,
     FlatList,
-    Image,
+    ImageBackground,
     Alert,
     View
 } from 'react-native';
@@ -25,20 +25,36 @@ import styles from '../styles/Styles';
 class RewardsScreen extends Component {
     render() {
         return (
-            <Content>
+            <Content style={{backgroundColor: 'white'}}>
                 <List>
                     <ListItem>
                         <Left>
-                            <Image source={require('../images/trophy1.jpg')}>
+                            <ImageBackground style={{alignSelf: 'center', marginLeft: 25, width: 30}} source={require('../images/trophy.png')}>
                                 <ProgressCircle
-                                    style={{height: 30}}
+                                    style={{height: 75, width: 75, alignSelf: 'center'}}
                                     progress={(this.props.tripsSaved/10) <= 1 ? this.props.tripsSaved/10 : 1}
                                     progressColor={GLOBALCOLORS.PINK}
+                                    strokeWidth={5}
                                 />
-                            </Image>
+                            </ImageBackground>
                         </Left>
                         <Body>
-                            <Text>10 Trips Saved</Text>
+                            <Text style={styles.rewardItemText}>10 Trips Saved</Text>
+                        </Body>
+                    </ListItem>
+                    <ListItem>
+                        <Left>
+                            <ImageBackground style={{alignSelf: 'center', marginLeft: 25, width: 30}} source={require('../images/trophy.png')}>
+                                <ProgressCircle
+                                    style={{height: 75, width: 75, alignSelf: 'center'}}
+                                    progress={(this.props.tripsSaved/50) <= 1 ? this.props.tripsSaved/50 : 1}
+                                    progressColor={GLOBALCOLORS.PINK}
+                                    strokeWidth={5}
+                                />
+                            </ImageBackground>
+                        </Left>
+                        <Body>
+                            <Text style={styles.rewardItemText}>50 Trips Saved</Text>
                         </Body>
                     </ListItem>
                 </List>
