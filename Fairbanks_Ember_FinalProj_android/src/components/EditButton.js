@@ -12,7 +12,7 @@ export default class EditButton extends Component {
                 onPress={() => this.props.editPressed()}
             >
                 <Text style={styles.editButtonText}>
-                    Edit
+                    Edit Information
                 </Text>
             </TouchableOpacity>
         )

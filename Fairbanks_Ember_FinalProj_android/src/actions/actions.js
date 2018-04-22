@@ -1,6 +1,7 @@
 import {
     ADDACTIVITY,
     SAVESETTINGS,
+    SETINFO
 } from './constants';
 
 export function addActivity(activity) {
@@ -10,10 +11,17 @@ export function addActivity(activity) {
     };
 }
 
-export function saveSettings(name, address, goals) {
+export function setInfo(info) {
+    return {
+        type: SETINFO,
+        info: info
+    };
+}
+
+export function saveSettings(username, address, goals) {
     return {
         type: SAVESETTINGS,
-        name: name,
+        username: username,
         address: address,
         goals: goals
     }

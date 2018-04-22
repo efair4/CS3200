@@ -6,19 +6,19 @@ export default StyleSheet.create({
 		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center',
-		padding: 10
+		padding: 10,
+		backgroundColor: 'white'
 	},
 	homeContainer: {
 		flex: 1,
 		justifyContent: 'flex-start',
 		alignItems: 'center',
-		padding: 10
+		padding: 10,
+		backgroundColor: 'white'
 	},
-	settingsContainer: {
-		flex: 1, 
-		justifyContent: 'flex-start',
-		alignItems: 'flex-start',
-		padding: 10
+	settingsScrollView: {
+		padding: 15,
+		backgroundColor: 'white'
 	},
 	settingsInfoText: {
 		fontSize: 25,
@@ -49,16 +49,53 @@ export default StyleSheet.create({
 	editButtonText: {
 		color: 'black',
 		fontFamily: 'sans-serif-bold',
+		fontWeight: '400',
 		fontSize: 20
 	},
 	saveButtonText: {
-		color: GLOBALCOLORS.DIGITAL,
+		color: 'white',
 		fontFamily: 'sans-serif-bold',
-		fontSize: 20
+		fontSize: 20,
+		fontWeight: '500'
+	},
+	cancelButtonText: {
+		color: 'red',
+		fontFamily: 'sans-serif-bold',
+		fontSize: 20,
+		fontWeight: '400'
+	},
+	editSettingsInputView: {
+		width: '100%',
+		backgroundColor: 'lightgray',
+		borderRadius: 3,
+		borderWidth: 2, 
+		borderColor: 'black',
+		marginTop: 5,
+		marginBottom: 10
+	},
+	noEditSettingsInputView: {
+		width: '100%',
+		marginTop: 5,
+		marginBottom: 10,
+		borderBottomWidth: 2,
+		borderBottomColor: 'black'
 	},
 	settingsInput: {
-		fontSize: 25,
+		fontSize: 20,
 		width: '100%',
+		color: 'black',
+	},
+	settingsHeader: {
+		fontSize: 23,
+		textDecorationLine: 'underline',
+		fontWeight: '500',
 		color: 'black'
+	},
+	settingsSubheader: {
+		fontSize: 20,
+		color: 'black'
+	},
+	scrollContentView: {
+		alignSelf: 'stretch'
 	}
 });

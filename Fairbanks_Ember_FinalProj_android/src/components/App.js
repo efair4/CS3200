@@ -4,10 +4,12 @@
  */
 
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import {
 	Platform,
 	StyleSheet,
 	Text,
+	AsyncStorage,
 	View
 } from 'react-native';
 import {
@@ -31,22 +33,36 @@ import EditActivityScreen from '../screens/EditActivityScreen';
 import HistoryScreen from '../screens/HistoryScreen';
 import RewardsScreen from '../screens/RewardsScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+import AboutScreen from '../screens/AboutScreen';
+
+import { saveInitialInfo, setInfo } from '../actions/actions';
+
+const titleColor = 'black';
+const navBarColor = colors.YELLOW;
 
 const HomeTab = StackNavigator({
 	Home: {
 		screen: HomeScreen,
 		navigationOptions: {
-			title: 'Home'
+			title: 'Home',
+			headerStyle: {backgroundColor: navBarColor},
+			headerTitleStyle: {color: titleColor}
 		}
 	},
 	AddActivityScreen: {
 		screen: AddActivityScreen,
 		navigationOptions: {
-			title: 'Add Trip Saving Activity'
+			title: 'Add Trip Saving Activity',
+			headerStyle: {backgroundColor: navBarColor},
+			headerTitleStyle: {color: titleColor}
 		}
 	},
 	EditActivityScreen: {
-		screen: EditActivityScreen
+		screen: EditActivityScreen,
+		navigationOptions: {
+			headerStyle: {backgroundColor: navBarColor},
+			headerTitleStyle: {color: titleColor}
+		}
 	}
 },
 {
@@ -58,7 +74,9 @@ const HistoryTab = StackNavigator({
 	Home: {
 		screen: HistoryScreen,
 		navigationOptions: {
-			title: 'Activity History'
+			title: 'Activity History',
+			headerStyle: {backgroundColor: navBarColor},
+			headerTitleStyle: {color: titleColor}
 		}
 	}
 },
@@ -70,7 +88,17 @@ const SettingsTab = StackNavigator({
 	Home: {
 		screen: SettingsScreen,
 		navigationOptions: {
-			title: 'Settings'
+			title: 'Settings',
+			headerStyle: {backgroundColor: navBarColor},
+			headerTitleStyle: {color: titleColor}
+		}
+	},
+	AboutScreen: {
+		screen: AboutScreen,
+		navigationOptions: {
+			title: 'About the App',
+			headerStyle: {backgroundColor: navBarColor},
+			headerTitleStyle: {color: titleColor}
 		}
 	}
 },
@@ -82,7 +110,9 @@ const RewardsTab = StackNavigator({
 	Home: {
 		screen: RewardsScreen,
 		navigationOptions: {
-			title: 'Trophies'
+			title: 'Trophies',
+			headerStyle: {backgroundColor: navBarColor},
+			headerTitleStyle: {color: titleColor}
 		}
 	}
 },
@@ -135,11 +165,21 @@ const RootTab = TabNavigator({
 	tabBarOptions: {
 		showIcon: true,
 		showLabel: true,
-		activeTintColor: colors.PROCESS
+		activeTintColor: navBarColor
 	}
 });
 
-export default class App extends Component {
+class App extends Component {
+	componentWillMount() {
+		AsyncStorage.multiGet(['recentActivities', 'allActivities', 'username', 'address', 'goals'])
+		.then((response) => {
+			var info = [];
+			for(i = 0; i < response.length; i++) {
+				info.push(response[i][1]);
+			}
+			this.props.dispatchSetInfo(info);
+		});
+	}
 	render() {
 		return (
 			<RootTab/>
@@ -147,4 +187,17 @@ export default class App extends Component {
 	}
 }
 
+const mapStateToProps = (state) => {
+	return {
+		loadingInfo: state.loadingInfo,
+		recentActivities: state.recentActivities
+	}
+}
 
+function mapDispatchToProps(dispatch) {
+	return {
+		dispatchSetInfo: (info) => dispatch(setInfo(info))
+	}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)
