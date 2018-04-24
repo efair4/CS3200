@@ -57,6 +57,36 @@ class RewardsScreen extends Component {
                             <Text style={styles.rewardItemText}>50 Trips Saved</Text>
                         </Body>
                     </ListItem>
+                    <ListItem>
+                        <Left>
+                            <ImageBackground style={{alignSelf: 'center', marginLeft: 25, width: 30}} source={require('../images/trophy.png')}>
+                                <ProgressCircle
+                                    style={{height: 75, width: 75, alignSelf: 'center'}}
+                                    progress={this.props.pubTaken ? 1 : 0}
+                                    progressColor={GLOBALCOLORS.PINK}
+                                    strokeWidth={5}
+                                />
+                            </ImageBackground>
+                        </Left>
+                        <Body>
+                            <Text style={styles.rewardItemText}>First Use of Public Transportation</Text>
+                        </Body>
+                    </ListItem>
+                    <ListItem>
+                        <Left>
+                            <ImageBackground style={{alignSelf: 'center', marginLeft: 25, width: 30}} source={require('../images/trophy.png')}>
+                                <ProgressCircle
+                                    style={{height: 75, width: 75, alignSelf: 'center'}}
+                                    progress={(this.props.photosCount/5) <= 1 ? this.props.photosCount/5 : 1}
+                                    progressColor={GLOBALCOLORS.PINK}
+                                    strokeWidth={5}
+                                />
+                            </ImageBackground>
+                        </Left>
+                        <Body>
+                            <Text style={styles.rewardItemText}>5 Photos Uploaded</Text>
+                        </Body>
+                    </ListItem>
                 </List>
             </Content>
         );
@@ -65,7 +95,9 @@ class RewardsScreen extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        tripsSaved: state.tripsSaved
+        tripsSaved: state.tripsSaved,
+        pubTrips: state.pubTrips,
+        photosCount: state.photosCount
     };
 }
 

@@ -92,10 +92,19 @@ export default StyleSheet.create({
 		color: 'black'
 	},
 	rewardItemText: {
+		marginLeft: -50,
 		fontSize: 20,
 		color: 'black'
 	},
 	scrollContentView: {
 		alignSelf: 'stretch'
+	},
+	pickerItem: {
+		height: 70, 
+		justifyContent: 'flex-end'
+	},
+	pickerLabel: {
+		marginLeft: 70, 
+		alignSelf: 'flex-start'
 	}
 });
