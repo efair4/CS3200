@@ -51,6 +51,10 @@ class SettingsScreen extends Component {
         });
     }
 
+    componentDidMount() {
+        this.content._root.scrollToPosition(0,0);
+    }
+
     static navigationOptions = ({navigation}) => {
         const {params = {}} = navigation.state;
         return {
@@ -65,7 +69,7 @@ class SettingsScreen extends Component {
     render() {
         return (
             <Container style={{backgroundColor: 'white'}}>
-                <Content>
+                <Content ref={c => (this.content = c)}>
                     <List>
                         <Separator bordered>            
                             <Text style={styles.settingsHeader}>

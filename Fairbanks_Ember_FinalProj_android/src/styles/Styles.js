@@ -1,6 +1,8 @@
 import { StyleSheet } from 'react-native';
 import GLOBALCOLORS from "../utils/Colors";
 
+const FONT = 'sans-serif-bold';
+
 export default StyleSheet.create({
 	container: {
 		flex: 1,
@@ -42,25 +44,25 @@ export default StyleSheet.create({
 	addActivityText: {
 		textAlign: 'center',
 		alignSelf: 'center',
-		fontFamily: 'sans-serif-bold',
+		fontFamily: FONT,
 		fontSize: 20,
 		color: 'black'
 	},
 	editButtonText: {
 		color: 'black',
-		fontFamily: 'sans-serif-bold',
+		fontFamily: FONT,
 		fontWeight: '400',
 		fontSize: 20
 	},
 	saveButtonText: {
 		color: 'white',
-		fontFamily: 'sans-serif-bold',
+		fontFamily: FONT,
 		fontSize: 20,
 		fontWeight: '500'
 	},
 	cancelButtonText: {
 		color: 'red',
-		fontFamily: 'sans-serif-bold',
+		fontFamily: FONT,
 		fontSize: 20,
 		fontWeight: '400'
 	},
@@ -100,11 +102,65 @@ export default StyleSheet.create({
 		alignSelf: 'stretch'
 	},
 	pickerItem: {
-		height: 70, 
-		justifyContent: 'flex-end'
+		height: 85,
+		justifyContent: 'flex-start',
+		alignItems: 'center',
+		flexDirection: 'column',
+		marginTop: 10,
+		marginLeft: 10,
+		marginRight: 10
 	},
 	pickerLabel: {
-		marginLeft: 70, 
-		alignSelf: 'flex-start'
-	}
+		marginBottom: 10,
+		alignSelf: 'flex-end',
+		fontSize: 20,
+		color: 'black',
+		fontFamily: FONT
+	},
+	picker: { 
+		width: 200, 
+		height: 30
+	},
+	addItemScreenText: {
+		fontSize: 20,
+		color: 'black',
+		fontFamily: FONT,
+	},
+	addItemInput: {
+		fontSize: 20,
+		width: '45%',
+		color: 'black',
+		textAlign: 'right',
+		alignSelf: 'flex-end'
+	},
+	addItemItem: {
+		height: 110,
+		marginLeft: 10, 
+		marginRight: 10
+	},
+	saveActivityButton: {
+		width: '50%',
+		height: 55,
+		backgroundColor: GLOBALCOLORS.YELLOW,
+		justifyContent: 'center',
+		borderRadius: 6,
+		padding: 5,
+		margin: 10
+	},
+	saveActivityText: {
+		textAlign: 'center',
+		alignSelf: 'center',
+		fontFamily: FONT,
+		fontSize: 30,
+		color: 'black'
+	},
+	disabledButton: {
+		width: '50%',
+		height: 55,
+		backgroundColor: 'lightgray',
+		justifyContent: 'center',
+		borderRadius: 6,
+		padding: 5,
+		margin: 10
+	},
 });
