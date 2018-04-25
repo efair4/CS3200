@@ -103,8 +103,8 @@ export default StyleSheet.create({
 	},
 	pickerItem: {
 		height: 85,
-		justifyContent: 'flex-start',
-		alignItems: 'center',
+		justifyContent: 'center',
+		alignItems: 'flex-start',
 		flexDirection: 'column',
 		marginTop: 10,
 		marginLeft: 10,
@@ -112,7 +112,7 @@ export default StyleSheet.create({
 	},
 	pickerLabel: {
 		marginBottom: 10,
-		alignSelf: 'flex-end',
+		alignSelf: 'flex-start',
 		fontSize: 20,
 		color: 'black',
 		fontFamily: FONT
@@ -128,13 +128,14 @@ export default StyleSheet.create({
 	},
 	addItemInput: {
 		fontSize: 20,
+		margin: 10,
 		width: '45%',
 		color: 'black',
-		textAlign: 'right',
-		alignSelf: 'flex-end'
+		textAlign: 'left',
+		alignSelf: 'flex-start'
 	},
 	addItemItem: {
-		height: 110,
+		height: 165,
 		marginLeft: 10, 
 		marginRight: 10
 	},

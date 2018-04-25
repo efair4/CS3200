@@ -69,48 +69,18 @@ class AddActivityScreen extends Component {
                         </Item>
                         {this.state.type == 'car' ? this._getCarpoolComp(): null}
                         {this.state.type == 'car' ? this._getTripchainComp(): null}
-                        {/*<Item style={styles.pickerItem}                            >
-                            <Label style={styles.pickerLabel}>Did you use public transportation instead of a car?</Label>
-                            <Picker
-                                style={styles.picker}
-                                mode='dropdown'
-                                placeholder='Select One'
-                                selectedValue={this.state.public}
-                                onValueChange={(val) => this.setState({public: val})}
-                            >
-                                <Picker.Item label='Yes' value={true}/>
-                                <Picker.Item label='No' value={false}/>
-                            </Picker>
-                        </Item>
-                        <Item stackedLabel style={styles.addItemItem}>
-                            <Label style={styles.addItemScreenText}>If the above don't apply, how many places did you visit on your trip?</Label>
-                            <Input
-                                placeholder='# of Destinations'
-                                keyboardType='numeric'
-                                style={styles.addItemInput}
-                                borderBottomWidth={1}
-                                borderRightWidth={1}
-                                borderLeftWidth={1}
-                                borderTopWidth={1}
-                                borderRadius={5}
-                                onChangeText={(val) => this.setState({numTrips: val})}
-                            />
-                        </Item>
-                        <Item style={styles.pickerItem}>
-                            <Label style={styles.pickerLabel}>Were there other people in your car who would have driven themselves?</Label>
-                            <Picker
-                                style={styles.picker}
-                                mode='dropdown'
-                                placeholder='Select One'
-                                selectedValue={this.state.carpool}
-                                onValueChange={(val) => this.setState({carpool: val})}
-                            >
-                                <Picker.Item label='Yes' value={true}/>
-                                <Picker.Item label='No' value={false}/>
-                            </Picker>
-                        </Item>
-                        {this.state.carpool ? this._getCarpoolComp(): null}
-        */}
+                        <Text style={styles.addItemScreenText}>
+                            Add pictures from your trip! (Optional)
+                        </Text>
+                        <CameraKitCamera
+                            ref={cam => this.camera = cam}
+                            style={{flex: 1, backgroundColor: 'white'}}
+                            cameraOptions={{
+                                flashMode: 'auto',
+                                focusMode: 'on',
+                                zoomMode: 'on',
+                                ratioOverlay: '1:1'
+                            }}/>
                 </Content>
                     <TouchableOpacity style={this.state.type == 'select' ? styles.disabledButton : styles.saveActivityButton}
                         onPress={() => this.state.type == 'select' ? null : this._saveButtonPressed()}
@@ -132,14 +102,16 @@ class AddActivityScreen extends Component {
                 <Input 
                     keyboardType='numeric'
                     style={styles.addItemInput}
-                    placeholder='Number of Passengers'
+                    placeholder='Passengers'
                     value={this.state.numPass}
                     borderBottomWidth={1}
                     borderRightWidth={1}
                     borderLeftWidth={1}
                     borderTopWidth={1}
                     borderRadius={5}
-                    onChangeText={(val) => this.setState({numPass: val})}/>
+                    onChangeText={(val) => this.setState({numPass: val})}
+                    onSubmitEditing={(val) => this.state.numPass != '' ? null : this.setState({numPass: '0'})}
+                    />
             </Item>
         );
     }
@@ -154,14 +126,16 @@ class AddActivityScreen extends Component {
             <Input 
                 keyboardType='numeric'
                 style={styles.addItemInput}
-                placeholder='Number of Destinations'
+                placeholder='Destinations'
                 value={this.state.numDest}
                 borderBottomWidth={1}
                 borderRightWidth={1}
                 borderLeftWidth={1}
                 borderTopWidth={1}
                 borderRadius={5}
-                onChangeText={(val) => this.setState({numDest: val})}/>
+                onChangeText={(val) => this.setState({numDest: val})}
+                onSubmitEditing={(val) => this.state.numDest != '' ? null : this.setState({numDest: '1'})}
+                />
             </Item>
         );
     }
