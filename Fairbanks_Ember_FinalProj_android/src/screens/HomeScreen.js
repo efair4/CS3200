@@ -11,7 +11,8 @@ import {
 } from 'react-native';
 import {
 	Content,
-	List,
+    List,
+    Card,
     ListItem,
     Right,
     Left,
@@ -39,18 +40,57 @@ class HomeScreen extends Component {
     _renderRecents() {
         return(
             <Content>
-                <List dataArray={this.props.recentActivities}
+                <List 
+                style={{width: '100%'}}
+                dataArray={this.props.recentActivities}
                     renderRow={(item) => {
+                        var header = this.getHeader(item);
+                        var tripsWord;
+                        var photosPhrase;
+                        if(item.activity.numTrips > 1) {
+                            tripsWord = 'trips';
+                        }
+                        else {
+                            tripsWord = 'trip';
+                        }
+                        if(item.activity.photos.length == 0) {
+                            photosPhrase = ''
+                        }
+                        else if(item.activity.photos.length == 1){
+                            photosPhrase = 'You added one photo for this trip!';
+                        }
+                        else  {
+                            photosPhrase = 'You added '+ item.activity.photos.length + ' photos for this trip!';
+                        }
                         return(
-                            <ListItem 
+                            <Card 
+                                style={{flexDirection: 'column', width: '100%'}}
                                 onPress={() => this.props.navigation.navigate('EditActivityScreen', {activity: item})}
                             >
-                            </ListItem>
+                                <Text style={styles.listItemHeader}>{header}</Text>
+                                <Text style={styles.listItem}>You saved {item.activity.numTrips} {tripsWord}!</Text>
+                                <Text style={styles.listItem}>{photosPhrase}</Text>
+                            </Card>
                         )
                     }}
                 />
             </Content>
         );
+    }
+
+    getHeader(item) {
+        switch(item.activity.type) {
+            case 'active':
+                return 'Active Transportation Trip';
+            case 'public':
+                return 'Public Transportation Trip';
+            case 'carpool':
+                return 'Carpooling Trip';
+            case 'tripchain':
+                return 'Trip Chaining';
+            default:
+                return '';
+        }
     }
 }
 

@@ -16,7 +16,7 @@ let initialState = {
     allActivities: [],
     username: 'Ember',
     address: "777 E 1000 N, Apt K3, Logan Utah",
-    goals: {totalTrips: 8, activeTrips: 5, pubTrips: 10},
+    goals: {totalTrips: 15, activeTrips: 5, pubTrips: 10},
 };
 
 export default function(state = initialState, action) {
@@ -40,12 +40,15 @@ export default function(state = initialState, action) {
                 loadingInfo: false
             });
         case ADDACTIVITY:
-            return Object.assign({}, state, {
+            var newState = Object.assign({}, state, {
                 allActivities: addActivity(state.allActivities, action),
-                totalTrips: state.totalTrips + action.numTrips,
-                photosCount: state.photosCount + action.photos.length,
+                recentActivities: addRecent(state.recentActivities, action),
+                totalTrips: state.totalTrips + action.activity.numTrips,
+                photosCount: state.photosCount + action.activity.photos.length,
                 pubTaken: action.activityType == 'public' ? true : state.pubTaken
-            })
+            });
+            //AsyncStorage.setItem('state', newState);
+            return newState;
         case SAVESETTINGS: 
             AsyncStorage.setItem('username', action.username);
             AsyncStorage.setItem('address', action.address);
@@ -87,11 +90,16 @@ function addActivity(activities, action) {
     return [
         ...activities,
         {
-            activityType: action.activityType,
-            numTrips: action.numTrips,
-            photos: action.photos,
-            id: keyKeeper.getKey(),
-            dateCreated: Date.now()
+            activity: action.activity
+        }
+    ]
+}
+
+function addRecent(recents, action) {
+    return [
+        ...recents,
+        {
+            activity: action.activity
         }
     ]
 }
@@ -100,7 +108,7 @@ function checkRecents(recents) {
     var newRecents = [];
     var now = Date.now();
     recents.forEach(function(recent) {
-        if((recent.dateCreated.getTime() - now.getTime()) < TIMELIMIT) {
+        if((recent.activity.dateCreated.getTime() - now.getTime()) < TIMELIMIT) {
             newRecents.push(recent);
         }
     });

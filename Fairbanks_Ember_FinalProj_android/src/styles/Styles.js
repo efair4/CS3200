@@ -164,4 +164,15 @@ export default StyleSheet.create({
 		padding: 5,
 		margin: 10
 	},
+	listItemHeader: {
+		color: 'black',
+		fontWeight: '400',
+		textAlign: 'left',
+		fontSize: 20
+	},
+	listItem: {
+		color: 'black',
+		textAlign: 'left',
+		fontSize: 15
+	}
 });

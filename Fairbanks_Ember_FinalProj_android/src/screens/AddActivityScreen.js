@@ -20,19 +20,19 @@ import {
     Label,
     Picker
 } from 'native-base';
-import CameraKitCamera from 'react-native-camera-kit';
+//import CameraKitCamera from 'react-native-camera-kit';
 import styles from '../styles/Styles';
+import { Activity } from '../models/Activity';
+import {addActivity} from '../actions/actions';
 
 class AddActivityScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            numTrips: "",
             type: 'select',
-            carpool: false,
-            public: false,
             numPass: '0',
-            numDest: '1'
+            numDest: '1',
+            photos: []
         }
     }
 
@@ -72,7 +72,7 @@ class AddActivityScreen extends Component {
                         <Text style={styles.addItemScreenText}>
                             Add pictures from your trip! (Optional)
                         </Text>
-                        <CameraKitCamera
+                        {/*<CameraKitCamera
                             ref={cam => this.camera = cam}
                             style={{flex: 1, backgroundColor: 'white'}}
                             cameraOptions={{
@@ -81,6 +81,7 @@ class AddActivityScreen extends Component {
                                 zoomMode: 'on',
                                 ratioOverlay: '1:1'
                             }}/>
+                        */}
                 </Content>
                     <TouchableOpacity style={this.state.type == 'select' ? styles.disabledButton : styles.saveActivityButton}
                         onPress={() => this.state.type == 'select' ? null : this._saveButtonPressed()}
@@ -141,7 +142,20 @@ class AddActivityScreen extends Component {
     }
 
     _saveButtonPressed() {
-        this.props.dispatchSaveActivity()
+        var type = this.state.type;
+        var numTrips = 1
+        if (this.state.type == 'car') {
+            if (this.state.numPass >= this.state.numDest) {
+                type = 'carpool';
+                numTrips = this.state.numPass;
+            }
+            else {
+                type = 'tripchain';
+                numTrips = this.state.numDest;
+            }
+        }
+        this.props.dispatchAddActivity(new Activity(type, numTrips, this.state.photos));
+        this.props.navigation.goBack();
     }
 }
 
@@ -152,4 +166,10 @@ const mapStateToProps = (state) => {
     };
 }
 
-export default connect(mapStateToProps)(AddActivityScreen);
+function mapDispatchToProps(dispatch) {
+    return {
+        dispatchAddActivity: (activity) => dispatch(addActivity(activity))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddActivityScreen);
