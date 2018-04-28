@@ -1,11 +1,11 @@
-import keyKeeper from '../utils/KeyKeeper';
-
 export class Activity {
-    constructor(type, numTrips, photos) {
+    constructor(type, numTrips, numPass, numDest, photos, dateCreated, id) {
         this.type = type;
         this.numTrips = numTrips;
+        this.numPassengers = numPass;
+        this.numDestinations = numDest;
         this.photos = photos,
-        this.dateCreated = Date.now();
-        this.id = keyKeeper.getKey();
+        this.dateCreated = dateCreated;
+        this.id = id;
     }
 }

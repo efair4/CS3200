@@ -60,6 +60,7 @@ const HomeTab = StackNavigator({
 	EditActivityScreen: {
 		screen: EditActivityScreen,
 		navigationOptions: {
+			title: 'Edit Activity',
 			headerStyle: {backgroundColor: navBarColor},
 			headerTitleStyle: {color: titleColor}
 		}
@@ -133,7 +134,7 @@ const RootTab = TabNavigator({
 		navigationOptions: {
 			tabBarLabel: 'Home',
 			tabBarIcon: ({tintColor}) => {
-				return <OctIcon name='home' size={25} color={tintColor}/>
+				return <MatComIcon name='home-outline' size={25} color={tintColor}/>
 			}
 		}
 	},
@@ -186,12 +187,9 @@ const RootTab = TabNavigator({
 
 class App extends Component {
 	componentWillMount() {
-		AsyncStorage.multiGet(['recentActivities', 'allActivities', 'username', 'address', 'goals', 'tripsSaved'])
+		AsyncStorage.getItem('state')
 		.then((response) => {
-			var info = [];
-			for(i = 0; i < response.length; i++) {
-				info.push(response[i][1]);
-			}
+			var info = JSON.parse(response);
 			this.props.dispatchSetInfo(info);
 		});
 	}

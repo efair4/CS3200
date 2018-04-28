@@ -44,15 +44,12 @@ class SettingsScreen extends Component {
 
     componentDidMount() {
         self = this;
+        this.content._root.scrollToPosition(0,0);
         this.props.navigation.setParams({
             editable: this.state.editable,
             setEditable: this._setEditable,
             donePressed: this._donePressed
         });
-    }
-
-    componentDidMount() {
-        this.content._root.scrollToPosition(0,0);
     }
 
     static navigationOptions = ({navigation}) => {
@@ -81,8 +78,8 @@ class SettingsScreen extends Component {
                                 <TextInput style={styles.settingsInput}
                                     placeholder='Name'
                                     value={this.state.nameVal}
-                                    autoFocus={true}
                                     keyboardType = 'default'
+                                    autoFocus={false}
                                     underlineColorAndroid='transparent'
                                     keyboardShouldPersistTaps='never'
                                     editable={this.state.editable}
@@ -100,7 +97,7 @@ class SettingsScreen extends Component {
                                 <TextInput style={styles.settingsInput}
                                     placeholder='Address'
                                     value={this.state.addressVal}
-                                    autoFocus={true}
+                                    autoFocus={false}
                                     keyboardType = 'default'
                                     underlineColorAndroid='transparent'
                                     keyboardShouldPersistTaps='never'
@@ -124,7 +121,7 @@ class SettingsScreen extends Component {
                                 <TextInput style={styles.settingsInput}
                                     placeholder='Enter some number of trips'
                                     value={String(this.state.totalTripsVal)}
-                                    autoFocus={true}
+                                    autoFocus={false}
                                     keyboardType = 'default'
                                     underlineColorAndroid='transparent'
                                     keyboardShouldPersistTaps='never'
@@ -143,7 +140,7 @@ class SettingsScreen extends Component {
                                 <TextInput style={styles.settingsInput}
                                     placeholder='Enter some number of trips'
                                     value={String(this.state.activeTripsVal)}
-                                    autoFocus={true}
+                                    autoFocus={false}
                                     keyboardType = 'default'
                                     underlineColorAndroid='transparent'
                                     keyboardShouldPersistTaps='never'
@@ -162,7 +159,7 @@ class SettingsScreen extends Component {
                                 <TextInput style={styles.settingsInput}
                                     placeholder='Enter some number of trips'
                                     value={String(this.state.pubTripsVal)}
-                                    autoFocus={true}
+                                    autoFocus={false}
                                     keyboardType = 'default'
                                     underlineColorAndroid='transparent'
                                     keyboardShouldPersistTaps='never'

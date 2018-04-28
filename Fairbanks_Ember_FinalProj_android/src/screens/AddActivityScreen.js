@@ -24,6 +24,7 @@ import {
 import styles from '../styles/Styles';
 import { Activity } from '../models/Activity';
 import {addActivity} from '../actions/actions';
+import keyKeeper from '../utils/KeyKeeper';
 
 class AddActivityScreen extends Component {
     constructor(props) {
@@ -142,6 +143,8 @@ class AddActivityScreen extends Component {
     }
 
     _saveButtonPressed() {
+        var date = new Date();
+        var id = keyKeeper.getKey();
         var type = this.state.type;
         var numTrips = 1
         if (this.state.type == 'car') {
@@ -154,7 +157,7 @@ class AddActivityScreen extends Component {
                 numTrips = this.state.numDest;
             }
         }
-        this.props.dispatchAddActivity(new Activity(type, numTrips, this.state.photos));
+        this.props.dispatchAddActivity(new Activity(type, numTrips, this.state.numPass, this.state.numDest, this.state.photos, date, id));
         this.props.navigation.goBack();
     }
 }
